@@ -1,0 +1,56 @@
+﻿@model AddPictureViewModel
+<div class="row">
+    <form asp-action="AddPicture" asp-controller="Pictures" method="post" enctype="multipart/form-data">
+        <div class="col-md-4">
+            <div>
+
+                <img id="GamePicture" class="img-responsive img-fluid with-border" style="max-width:300px;" src="/GamePictures/NoImage.jpg" />
+
+                <span class="text-danger" asp-validation-for="PictureFile"></span>
+
+            </div>
+            <input asp-for="PictureFile" onchange="fileChangeFunction(this)" class="HiddenFileInput" type="file">
+
+            <div class="input-group">
+                <input disabled id="PictureName" type="text" class="form-control">
+
+                <div class="input-group-btn">
+                    <button onclick="$('#PictureFile').click()" type="button" class="btn btn-default btn-danger">Select</button>
+                </div>
+                <!-- /btn-group -->
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label asp-for="Nationality"></label>
+                <select asp-for="Nationality" asp-items="Html.GetEnumSelectList<GuessMyNationality.Domain.Models.Nationality>()">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="Nationality" class="text-danger" />
+            </div>
+            <div class="form-group">
+                <label asp-for="IsFamous"></label>
+                <input asp-for="IsFamous" type="checkbox" />
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary btn-block">Save</button>
+
+            </div>
+            <div style="margin-top:20px;" class="alert alert-info">
+                select Person Picture,
+                Select Nationality,
+                Select IsFamous chech box if the person is famous
+                and then click on save it will be added to game pictures
+                you Can remove any picture from Side menu Pictures List
+            </div>
+
+        </div>
+    </form>
+
+</div>
+@section Scripts
+{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/AddPicture.js"></script>
+}
