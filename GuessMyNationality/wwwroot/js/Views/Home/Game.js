@@ -1,4 +1,6 @@
+var interval = window.setInterval(function () { alert("Ok"); }, 3000, 3);
 function StartAnimation() {
+    clearInterval(interval);
     $(".image-box").animate({
         top: '150px',
     }, 3000, function () { $(this).remove(); });
