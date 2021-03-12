@@ -4,9 +4,7 @@
 
 <div class="content">
     <button type="button" onclick="StartAnimation()" class="btn btn-info mb-2">click</button>
-    <div class="image-box " id="draggable">
-        <img src="/GamePictures/image.jpeg" alt="image" id="image">
-    </div>
+    @await Component.InvokeAsync(typeof(GuessMyNationality.MVC.ViewComponents.GamePhotoViewComponent)) 
 </div>
 
 
