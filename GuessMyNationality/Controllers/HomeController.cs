@@ -73,7 +73,7 @@ namespace GuessMyNationality.Controllers
                 Game game = new Game
                 {
                     Guid = Guid.NewGuid().ToString("N"),
-                    IpAddress = "22",
+                    IpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString(),
                     NumberOfImages = 10,
                     Score = 0,
                     StartDateTime = DateTime.Now
