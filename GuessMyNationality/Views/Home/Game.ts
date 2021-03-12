@@ -1,11 +1,14 @@
 ﻿
 function startGame() {
     AddScore(null, null, null);
+    $(".StartButton").hide('slow');
+    $(".ShowScore").hide('slow');
     StartShowingPictures();
 }
 var i = 0;
 var j = 0;
 function StartShowingPictures() {
+    
     if (i > 0) {
         j = 4000;
     }
@@ -16,20 +19,27 @@ function StartShowingPictures() {
             StartShowingPictures();             //  ..  again which will tr vigger another
         }                                 //  ..  setTimeout()
         else {
-            RestartGame();
+            setTimeout(function () {
+                $("#StartButtonB").html("Restart Game");
+                $(".StartButton").show('slow');
+                $("#ShowScoreH").html("You Got" +"  "+ $('#finalScore').html()+"  "  +"Scores");
+                $(".ShowScore").show('slow');
+                i = 0;
+                j = 0;
+            }, 4000);
         }
     }, j)
 }
-function RestartGame() {
-    $.ajax({
-        url: "/Home/GetStartButtonViewComponent",
+//function RestartGame() {
+//    $.ajax({
+//        url: "/Home/GetStartButtonViewComponent",
 
-        method: "post",
-        success: function (result) {
-            $(".content").html(result);
-        }
-        });
-}
+//        method: "post",
+//        success: function (result) {
+//            $(".content").replaceWith(result);
+//        }
+//        });
+//}
 
 function GetGamePictureAndStartMoving() {
     $.ajax({

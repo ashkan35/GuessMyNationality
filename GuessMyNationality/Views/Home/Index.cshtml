@@ -1,9 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<div class="StartButton">
+    <button id="StartButtonB" type="button" onclick="startGame()" class="btn btn-lg btn-info">StartGame</button>
+</div>
+<div class="ShowScore" >
+    <h3 id="ShowScoreH" class="text-info">You Score</h3>
+</div>
 <div class="content">
-    @await Component.InvokeAsync(typeof(GuessMyNationality.MVC.ViewComponents.StartButtonViewComponent))
 </div>
 
 
