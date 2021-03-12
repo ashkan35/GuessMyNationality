@@ -22,10 +22,10 @@ namespace GuessMyNationality.Controllers
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        [HttpPost]
+        public Task<ViewComponentResult> GetGamePictureViewComponent()
         {
-            return View();
+            return Task.Run(() => { return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.GamePictureViewComponent)); });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

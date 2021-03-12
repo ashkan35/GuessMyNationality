@@ -1,6 +1,15 @@
-﻿var interval = window.setInterval(function () { alert("Ok") }, 3000,3);
+﻿function startGame() {
+    $.ajax({
+
+        url: "/Home/GetGamePictureViewComponent",
+        method: "post",
+        success: function (result) {
+            $(".content").replaceWith(result);
+            StartAnimation();
+        }
+    })
+}
 function StartAnimation() {
-    clearInterval(interval);
     $(".image-box").animate({
         top: '150px',
     }, 3000, function () { $(this).remove(); });

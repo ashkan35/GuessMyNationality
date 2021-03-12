@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace GuessMyNationality.MVC.ViewComponents
 {
-    public class GamePhotoViewComponent:ViewComponent
+    public class GamePictureViewComponent:ViewComponent
     {
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View("/Views/Home/GamePhotoViewComponent.cshtml");
+            return View("/Views/Home/GamePictureViewComponent.cshtml");
         }
     }
 }
