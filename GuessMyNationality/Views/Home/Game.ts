@@ -12,7 +12,7 @@ function StartShowingPictures() {
     setTimeout(function () {   //  call a 4s setTimeout when the loop is called
         GetGamePictureAndStartMoving();   //  your code here
         i++;                    //  increment the counter
-        if (i < 12) {           //  if the counter < 10, call the loop function
+        if (i < 5) {           //  if the counter < 10, call the loop function
             StartShowingPictures();             //  ..  again which will tr vigger another
         }                                 //  ..  setTimeout()
         else {
@@ -23,7 +23,7 @@ function StartShowingPictures() {
 function RestartGame() {
     $.ajax({
         url: "/Home/GetStartButtonViewComponent",
-        data: { id: 1 },
+
         method: "post",
         success: function (result) {
             $(".content").html(result);
