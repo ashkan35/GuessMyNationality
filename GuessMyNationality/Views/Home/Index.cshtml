@@ -2,7 +2,23 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="content">
+    <button type="button" class="btn btn-info mb-2">click</button>
+    <div class="image-box " id="draggable">
+        <img  src="/GamePictures/image.jpeg" alt="image" id="image">
+    </div>
 </div>
+
+
+
+<div class="box box-top-l" id="div1">Japanese</div>
+<div class="box box-top-r" id="div2">Chinese</div>
+<div class="box box-bottom-l" id="div3">Korean</div>
+<div class="box box-bottom-r" id="div4">Thai</div>
+
+@section Scripts{
+    <script src="~/js/jquery-3.6.0.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/index.js"></script>
+}

@@ -6,7 +6,6 @@
     <title>Quay - Dashboard</title>
 
     <link href="/AdminTemplate/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/AdminTemplate/css/datepicker3.css" rel="stylesheet">
     <link href="/AdminTemplate/css/styles.css" rel="stylesheet">
     <link href="~/AdminTemplate/css/MyCss.css" rel="stylesheet" />
     <!--Icons-->
@@ -32,8 +31,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Quay</a>
-                <ul class="nav navbar-top-links navbar-right">
+                <a class="navbar-brand" href="#">GuessMyNationality</a>
+                @*<ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                             <i class="glyphicon glyphicon-envelope"></i><span class="label label-danger">15</span>
@@ -110,7 +109,7 @@
                             </li>
                         </ul>
                     </li>
-                </ul>
+                </ul>*@
             </div>
 
         </div><!-- /.container-fluid -->
@@ -139,23 +138,13 @@
 
     <script src="/AdminTemplate/js/jquery-1.11.1.min.js"></script>
     <script src="/AdminTemplate/js/bootstrap.min.js"></script>
-    <script src="/AdminTemplate/js/chart.min.js"></script>
+    @*<script src="/AdminTemplate/js/chart.min.js"></script>
     <script src="/AdminTemplate/js/chart-data.js"></script>
     <script src="/AdminTemplate/js/easypiechart.js"></script>
-    <script src="/AdminTemplate/js/easypiechart-data.js"></script>
+    <script src="/AdminTemplate/js/easypiechart-data.js"></script>*@
     <script src="/AdminTemplate/js/bootstrap-datepicker.js"></script>
     <script src="/AdminTemplate/js/custom.js"></script>
-    <script>
-        window.onload = function () {
-            var chart1 = document.getElementById("line-chart").getContext("2d");
-            window.myLine = new Chart(chart1).Line(lineChartData, {
-                responsive: true,
-                scaleLineColor: "rgba(0,0,0,.2)",
-                scaleGridLineColor: "rgba(0,0,0,.05)",
-                scaleFontColor: "#c5c7cc"
-            });
-        };
-    </script>
+
     @RenderSection("Scripts",false)
 </body>
 
