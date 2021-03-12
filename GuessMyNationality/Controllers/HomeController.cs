@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GuessMyNationality.Controllers
@@ -18,14 +19,14 @@ namespace GuessMyNationality.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IRepository<GamePicture> _pictureRepository;
         private readonly IHostEnvironment _hostEnvironment;
+        private readonly IRepository<Game> _gamerepository;
 
-
-        public HomeController(ILogger<HomeController> logger, IRepository<GamePicture> PictureRepository, IHostEnvironment hostEnvironment)
+        public HomeController(ILogger<HomeController> logger, IRepository<GamePicture> PictureRepository, IHostEnvironment hostEnvironment,IRepository<Game> gamerepository)
         {
             _logger = logger;
             _pictureRepository = PictureRepository;
             _hostEnvironment = hostEnvironment;
-
+            _gamerepository = gamerepository;
         }
 
         public IActionResult Index()
@@ -64,12 +65,49 @@ namespace GuessMyNationality.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public async Task<ViewComponentResult> GetScoresViewComponent(string ImageGuid="",string GameGuid="", Nationality? nationality=null)
+        public async Task<ViewComponentResult> GetScoresViewComponent(CancellationToken cancellationToken,string ImageGuid="",string GameGuid="", Nationality? nationality=null)
         {
-          
-                return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.ScoresViewComponent),new GameViewModel());
-            
-           
+
+            if (GameGuid == null || GameGuid=="")
+            {
+                Game game = new Game
+                {
+                    Guid = Guid.NewGuid().ToString("N"),
+                    IpAddress = "22",
+                    NumberOfImages = 10,
+                    Score = 0,
+                    StartDateTime = DateTime.Now
+                };
+                await _gamerepository.AddAsync(game, cancellationToken);
+                GameViewModel model = new GameViewModel { GameGuid = game.Guid, GameScore = game.Score };
+                return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.ScoresViewComponent),model);
+
+            }
+            else
+            {
+                var game = _gamerepository.Table.SingleOrDefault(x => x.Guid == GameGuid);
+                var image = _pictureRepository.Table.SingleOrDefault(x => x.Guid == ImageGuid);
+                if(game==null || image==null)
+                    return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.ScoresViewComponent), new GameViewModel());
+                else
+                {
+                    if (image.Nationality == nationality)
+                        game.Score += 10;
+                    else
+                        game.Score -= 5;
+                    GameViewModel model = new GameViewModel { GameGuid = game.Guid, GameScore = game.Score };
+                    await _gamerepository.UpdateAsync(game, cancellationToken);
+                    return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.ScoresViewComponent), model);
+
+                }
+
+            }
+
+
+        }
+        public Task<ViewComponentResult> GetStartButtonViewComponent(int id=0)
+        {
+            return Task.Run(()=> { return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.StartButtonViewComponent)); });
         }
     }
 }

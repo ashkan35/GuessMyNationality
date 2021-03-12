@@ -1,20 +1,34 @@
-﻿var i = 0;
-var j = 0;
+﻿
 function startGame() {
-    AddScore(null, null, null)
+    AddScore(null, null, null);
+    StartShowingPictures();
+}
+var i = 0;
+var j = 0;
+function StartShowingPictures() {
     if (i > 0) {
         j = 4000;
     }
-    setTimeout(function () {   //  call a 3s setTimeout when the loop is called
+    setTimeout(function () {   //  call a 4s setTimeout when the loop is called
         GetGamePictureAndStartMoving();   //  your code here
         i++;                    //  increment the counter
-        if (i < 9) {           //  if the counter < 10, call the loop function
-            startGame();             //  ..  again which will tr vigger another
-        }//  ..  setTimeout()
+        if (i < 12) {           //  if the counter < 10, call the loop function
+            StartShowingPictures();             //  ..  again which will tr vigger another
+        }                                 //  ..  setTimeout()
         else {
-            console.log("done");
+            RestartGame();
         }
     }, j)
+}
+function RestartGame() {
+    $.ajax({
+        url: "/Home/GetStartButtonViewComponent",
+        data: { id: 1 },
+        method: "post",
+        success: function (result) {
+            $(".content").html(result);
+        }
+        });
 }
 
 function GetGamePictureAndStartMoving() {
@@ -38,6 +52,7 @@ function AddScore(ImageGuid, GameGuid, Nationality) {
             $("#ScoreSection").html(result);
         }
         });
+    
 }
 
 function StartAnimation() {

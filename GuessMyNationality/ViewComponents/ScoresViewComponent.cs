@@ -16,4 +16,11 @@ namespace GuessMyNationality.MVC.ViewComponents
             return View("/Views/Home/ScoresViewComponent.cshtml", model);
         }
     }
+    public class StartButtonViewComponent : ViewComponent
+    {
+        public async Task<IViewComponentResult> InvokeAsync(GameViewModel model)
+        {
+            return View("/Views/Home/StartButtonViewComponent.cshtml", model);
+        }
+    }
 }

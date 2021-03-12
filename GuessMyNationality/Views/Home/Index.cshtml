@@ -3,7 +3,7 @@
 }
 
 <div class="content">
-    <button type="button" onclick="startGame()" class="btn btn-lg btn-info mb-2">Start Game</button>
+    @await Component.InvokeAsync(typeof(GuessMyNationality.MVC.ViewComponents.StartButtonViewComponent))
 </div>
 
 
