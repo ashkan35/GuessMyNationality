@@ -1,17 +1,36 @@
-﻿function startGame() {
+﻿var i = 0;
+var j = 0;
+function startGame() {
+    if (i > 0) {
+        j = 5000;
+    }
+    setTimeout(function () {   //  call a 3s setTimeout when the loop is called
+        GetGamePictureAndStartMoving();   //  your code here
+        i++;                    //  increment the counter
+        if (i < 9) {           //  if the counter < 10, call the loop function
+            startGame();             //  ..  again which will trigger another
+        }//  ..  setTimeout()
+        else {
+            console.log("done");
+        }
+    }, j)
+}
+function GetGamePictureAndStartMoving() {
     $.ajax({
 
         url: "/Home/GetGamePictureViewComponent",
         method: "post",
         success: function (result) {
             $(".content").replaceWith(result);
-            StartAnimation();
+            $.when(StartAnimation()).done(function () {
+            });
         }
     })
 }
+
 function StartAnimation() {
     $(".image-box").animate({
-        top: '150px',
+        top: '200px',
     }, 3000, function () { $(this).remove(); });
 
     $("#draggable").draggable({
@@ -48,7 +67,7 @@ function StartAnimation() {
                 }, 1000, function () {
                     var image = $('#image')[0];
                     var div1 = $('#div1')[0];
-                    alert('div-id : ' + div1.id + '\n' + 'image-id : ' + image.id);
+                    console.log('div-id : ' + div1.id + '\n' + 'image-id : ' + image.id);
                 });
 
 
@@ -61,7 +80,7 @@ function StartAnimation() {
                 }, 1000, function () {
                     var image = $('#image')[0];
                     var div2 = $('#div2')[0];
-                    alert('div-id : ' + div2.id + '\n' + 'image-id : ' + image.id);
+                    console.log('div-id : ' + div2.id + '\n' + 'image-id : ' + image.id);
                 });
             }
             else if (left < 20 && top > 20) {
@@ -72,7 +91,7 @@ function StartAnimation() {
                 }, 1000, function () {
                     var image = $('#image')[0];
                     var div3 = $('#div3')[0];
-                    alert('div-id : ' + div3.id + '\n' + 'image-id : ' + image.id);
+                    console.log('div-id : ' + div3.id + '\n' + 'image-id : ' + image.id);
                 });
             }
             else if (left > 20 && top > 20) {
@@ -83,7 +102,7 @@ function StartAnimation() {
                 }, 1000, function () {
                     var image = $('#image')[0];
                     var div4 = $('#div4')[0];
-                    alert('div-id : ' + div4.id + '\n' + 'image-id : ' + image.id);
+                    console.log('div-id : ' + div4.id + '\n' + 'image-id : ' + image.id);
                 });
             }
 

@@ -50,7 +50,11 @@ button:focus{
     margin: 10px;
     z-index: 0;
 }
-.box-top-l{
+.instructions {
+    position: absolute;
+    top: 0;
+}
+.box-top-l {
     top: 0;
     left: 0;
 }
