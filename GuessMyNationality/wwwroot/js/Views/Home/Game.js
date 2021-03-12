@@ -9,7 +9,7 @@ function startGame() {
         GetGamePictureAndStartMoving(); //  your code here
         i++; //  increment the counter
         if (i < 9) { //  if the counter < 10, call the loop function
-            startGame(); //  ..  again which will trigger another
+            startGame(); //  ..  again which will tr vigger another
         } //  ..  setTimeout()
         else {
             console.log("done");
