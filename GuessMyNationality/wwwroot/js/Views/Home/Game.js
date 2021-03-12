@@ -13,7 +13,7 @@ function StartShowingPictures() {
     setTimeout(function () {
         GetGamePictureAndStartMoving(); //  your code here
         i++; //  increment the counter
-        if (i < 5) { //  if the counter < 10, call the loop function
+        if (i < 10) { //  if the counter < 10, call the loop function
             StartShowingPictures(); //  ..  again which will tr vigger another
         } //  ..  setTimeout()
         else {
