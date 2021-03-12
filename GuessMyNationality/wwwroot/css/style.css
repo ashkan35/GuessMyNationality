@@ -54,6 +54,10 @@ button:focus{
     position: absolute;
     top: 0;
 }
+.ScoreSection {
+    position: absolute;
+    bottom: 20px;
+}
 .box-top-l {
     top: 0;
     left: 0;

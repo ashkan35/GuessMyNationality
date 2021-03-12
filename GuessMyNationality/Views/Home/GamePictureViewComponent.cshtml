@@ -1,5 +1,6 @@
-﻿<div class="content">
+﻿@model PictureToGameViewModel
+<div class="content">
     <div class="image-box " id="draggable">
-        <img src="/GamePictures/image.jpeg" alt="image" id="image">
+        <img name="Image" src=@Model.Path alt="image" id=@Model.Guid>
     </div>
 </div>

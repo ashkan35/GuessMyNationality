@@ -2,8 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-
-
 <div class="content">
     <button type="button" onclick="startGame()" class="btn btn-lg btn-info mb-2">Start Game</button>
 </div>
@@ -11,10 +9,12 @@
 
 <div class="alert alert-info instructions">Game play instructions</div>
 
-<div class="box box-top-l" id="div1">Japanese</div>
-<div class="box box-top-r" id="div2">Chinese</div>
-<div class="box box-bottom-l" id="div3">Korean</div>
-<div class="box box-bottom-r" id="div4">Thai</div>
+<div class="box box-top-l" id="Japanese">Japanese</div>
+<div class="box box-top-r" id="Chinese">Chinese</div>
+<div class="box box-bottom-l" id="Korean">Korean</div>
+<div class="box box-bottom-r" id="Thai">Thai</div>
+<div id="ScoreSection" class="ScoreSection">
+</div>
 
 @section Scripts{
     <script src="~/js/jquery-3.6.0.min.js"></script>

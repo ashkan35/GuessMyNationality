@@ -2,7 +2,7 @@
 var j = 0;
 function startGame() {
     if (i > 0) {
-        j = 5000;
+        j = 4000;
     }
     setTimeout(function () {   //  call a 3s setTimeout when the loop is called
         GetGamePictureAndStartMoving();   //  your code here
@@ -15,6 +15,7 @@ function startGame() {
         }
     }, j)
 }
+
 function GetGamePictureAndStartMoving() {
     $.ajax({
 
@@ -26,6 +27,16 @@ function GetGamePictureAndStartMoving() {
             });
         }
     })
+}
+function AddScore(ImageGuid, GameGuid, Nationality) {
+    $.ajax({
+        url: "/Home/GetScoresViewComponent",
+        data: { ImageGuid: ImageGuid, GameGuid:GameGuid, nationality:Nationality },
+        method: "post",
+        success: function (result) {
+            $("#ScoreSection").html(result);
+        }
+        });
 }
 
 function StartAnimation() {
@@ -45,17 +56,17 @@ function StartAnimation() {
             var left = ui.position.left;
             var top = ui.position.top;
 
-            var div1Left = ((window.innerWidth - $('#div1')[0].offsetWidth) / 2) - 10;
-            var div1Top = ((window.innerHeight - $('#div1')[0].offsetHeight) / 2) + 14;
+            var div1Left = ((window.innerWidth - $('#Japanese')[0].offsetWidth) / 2) - 10;
+            var div1Top = ((window.innerHeight - $('#Japanese')[0].offsetHeight) / 2) + 14;
 
-            var div2Left = ((window.innerWidth - $('#div2')[0].offsetWidth) / 2) - 10;
-            var div2Top = ((window.innerHeight - $('#div2')[0].offsetHeight) / 2) + 14;
+            var div2Left = ((window.innerWidth - $('#Chinese')[0].offsetWidth) / 2) - 10;
+            var div2Top = ((window.innerHeight - $('#Chinese')[0].offsetHeight) / 2) + 14;
 
-            var div3Left = ((window.innerWidth - $('#div3')[0].offsetWidth) / 2) - 10;
-            var div3Top = ((window.innerHeight - $('#div3')[0].offsetHeight) / 2) - 32;
+            var div3Left = ((window.innerWidth - $('#Korean')[0].offsetWidth) / 2) - 10;
+            var div3Top = ((window.innerHeight - $('#Korean')[0].offsetHeight) / 2) - 32;
 
-            var div4Left = ((window.innerWidth - $('#div4')[0].offsetWidth) / 2) - 10;
-            var div4Top = ((window.innerHeight - $('#div4')[0].offsetHeight) / 2) - 32;
+            var div4Left = ((window.innerWidth - $('#Thai')[0].offsetWidth) / 2) - 10;
+            var div4Top = ((window.innerHeight - $('#Thai')[0].offsetHeight) / 2) - 32;
 
 
 
@@ -65,9 +76,9 @@ function StartAnimation() {
                     top: '-' + div1Top + 'px',
                     opacity: '0'
                 }, 1000, function () {
-                    var image = $('#image')[0];
-                    var div1 = $('#div1')[0];
-                    console.log('div-id : ' + div1.id + '\n' + 'image-id : ' + image.id);
+                    var image = $("[name='Image']")[0];
+                    var div1 = $('#Japanese')[0];
+                    AddScore(image.id, $("#GameGuid").val(), div1.id);
                 });
 
 
@@ -78,9 +89,9 @@ function StartAnimation() {
                     top: '-' + div2Top + 'px',
                     opacity: '0'
                 }, 1000, function () {
-                    var image = $('#image')[0];
-                    var div2 = $('#div2')[0];
-                    console.log('div-id : ' + div2.id + '\n' + 'image-id : ' + image.id);
+                    var image = $("[name='Image']")[0];
+                    var div2 = $('#Chinese')[0];
+                    AddScore(image.id, $("#GameGuid").val(), div2.id);
                 });
             }
             else if (left < 20 && top > 20) {
@@ -89,9 +100,9 @@ function StartAnimation() {
                     top: '' + div3Top + 'px',
                     opacity: '0'
                 }, 1000, function () {
-                    var image = $('#image')[0];
-                    var div3 = $('#div3')[0];
-                    console.log('div-id : ' + div3.id + '\n' + 'image-id : ' + image.id);
+                    var image = $("[name='Image']")[0];
+                    var div3 = $('#Korean')[0];
+                    AddScore(image.id, $("#GameGuid").val(), div3.id);
                 });
             }
             else if (left > 20 && top > 20) {
@@ -100,9 +111,9 @@ function StartAnimation() {
                     top: '' + div4Top + 'px',
                     opacity: '0'
                 }, 1000, function () {
-                    var image = $('#image')[0];
-                    var div4 = $('#div4')[0];
-                    console.log('div-id : ' + div4.id + '\n' + 'image-id : ' + image.id);
+                    var image = $("[name='Image']")[0];
+                    var div4 = $('#Thai')[0];
+                    AddScore(image.id, $("#GameGuid").val(), div4.id);
                 });
             }
 
