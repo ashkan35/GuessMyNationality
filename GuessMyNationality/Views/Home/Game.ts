@@ -1,6 +1,7 @@
 ﻿var i = 0;
 var j = 0;
 function startGame() {
+    AddScore(null, null, null)
     if (i > 0) {
         j = 4000;
     }
