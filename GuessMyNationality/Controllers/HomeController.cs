@@ -53,7 +53,8 @@ namespace GuessMyNationality.Controllers
             PictureToGameViewModel model = new PictureToGameViewModel
             {
                 Guid = piv.Guid,
-                Path = $"\\GamePictures\\{piv.Name}"
+                Path = $"\\GamePictures\\{piv.Name}",
+                Nationality=piv.Nationality
             };
             return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.GamePictureViewComponent), model);
 

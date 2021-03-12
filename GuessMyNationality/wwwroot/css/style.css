@@ -82,5 +82,22 @@ button:focus{
     bottom: 0;
     right: 0;
 }
-
- 
+.truecircle {
+    position: absolute;
+    bottom: 50px;
+    right: 550px;
+    background-color: #54b115;
+}
+.falsecircle {
+    position: absolute;
+    bottom: 50px;
+    left: 550px;
+    background-color:#ff0000;
+}
+.dot {
+    
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: none;
+}

@@ -54,6 +54,19 @@ function GetGamePictureAndStartMoving() {
     })
 }
 function AddScore(ImageGuid, GameGuid, Nationality) {
+    if (GameGuid != null) {
+        if ($("[name='Image']").attr('nationality') == Nationality) {
+            $("#trueCircle").show('slow');
+            $("#trueCircle").hide('slow');
+
+
+        }
+        else {
+            $("#falseCircle").show('slow');
+            $("#falseCircle").hide('slow');
+        }
+    }
+
     $.ajax({
         url: "/Home/GetScoresViewComponent",
         data: { ImageGuid: ImageGuid, GameGuid:GameGuid, nationality:Nationality },
