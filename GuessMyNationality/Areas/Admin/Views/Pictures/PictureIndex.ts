@@ -20,11 +20,33 @@
         }
     });
 }
+function NationalityChanged(Nationality) {
+    if (Nationality != "Please select") {
+        let url = (new URL(document.location.toString()));
+        url.searchParams.delete("PageId");
+        url.searchParams.set("Ntionality", Nationality);
+        window.location.href = url.toString();
+    }
+    else {
+        let url = (new URL(document.location.toString()));
+        url.searchParams.delete("PageId");
+        url.searchParams.delete("Ntionality");
+        window.location.href = url.toString();
+    }
+}
 //function NationalityChanged(Nationality) {
-//    let url = (new URL(document.location.toString()));
+//    if (Nationality != "Please select") {
+//        let url = (new URL(document.location.toString()));
+//        url.searchParams.delete("PageId");
+//        url.search.set("Ntionality", Nationality);
+//        window.location = url;
+//    }
+//    else {
+//        let url = (new URL(document.location.toString()));
+//        url.searchParams.delete("PageId");
+//        url.search.delete("Ntionality");
+//        window.location = url;
+//    }
 
-//    url.searchParams.delete("PageId");
-//    url.searchParams.set("Ntionality", Nationality);
-//    window.location = url;
+
 //}
-

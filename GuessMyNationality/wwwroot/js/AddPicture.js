@@ -11,4 +11,5 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
 }
+
 //# sourceMappingURL=AddPicture.js.map
