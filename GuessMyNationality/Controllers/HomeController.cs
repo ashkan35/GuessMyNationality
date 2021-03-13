@@ -36,25 +36,25 @@ namespace GuessMyNationality.Controllers
         [HttpPost]
         public ViewComponentResult GetGamePictureViewComponent()
         {
-            var Pics = _pictureRepository.TableNoTracking;
-            int min = Pics.First().Id;
-            int max = Pics.OrderByDescending(x => x.Id).First().Id;
-            Random random = new Random();
-            int PicNumber = 0;
-            while (PicNumber == 0)
-            {
-                PicNumber = random.Next(min, max);
-                var isExist = Pics.Any(x => x.Id == PicNumber);
-                if (isExist == false)
-                    PicNumber = 0;
+            var Pic = _pictureRepository.TableNoTracking.OrderBy(x => Guid.NewGuid()).First();
+            //int min = Pics.First().Id;
+            //int max = Pics.OrderByDescending(x => x.Id).First().Id;
+            //Random random = new Random();
+            //int PicNumber = 0;
+            //while (PicNumber == 0)
+            //{
+            //    PicNumber = random.Next(min, max);
+            //    var isExist = Pics.Any(x => x.Id == PicNumber);
+            //    if (isExist == false)
+            //        PicNumber = 0;
 
-            }
-            var piv = Pics.SingleOrDefault(x => x.Id == PicNumber);
+            //}
+            //var piv = Pics.SingleOrDefault(x => x.Id == PicNumber);
             PictureToGameViewModel model = new PictureToGameViewModel
             {
-                Guid = piv.Guid,
-                Path = $"\\GamePictures\\{piv.Name}",
-                Nationality=piv.Nationality
+                Guid = Pic.Guid,
+                Path = $"\\GamePictures\\{Pic.Name}",
+                Nationality= Pic.Nationality
             };
             return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.GamePictureViewComponent), model);
 
