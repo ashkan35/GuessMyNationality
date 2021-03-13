@@ -6,6 +6,10 @@
             <div class="panel-heading">Basic Table</div>
             <a class="btn btn-success btn-block" asp-action="AddPicture">Add New Picture</a>
             <div class="panel-body">
+                <label>Sort By:</label>
+                <select onchange="NationalityChanged(this.options[this.selectedIndex].text)" asp-items="Html.GetEnumSelectList<GuessMyNationality.Domain.Models.Nationality>()">
+                    <option selected="selected" value="">Please select</option>
+                </select>
                 <div class="bootstrap-table">
                     <div class="fixed-table-toolbar"></div><div class="fixed-table-container">
                         <div class="fixed-table-header"><table></table></div><div class="fixed-table-body">
@@ -65,7 +69,7 @@
     <div class="col-md-2"></div>
 </div>
 @section Scripts{
-    <script src="~/js/PictureIndex.js"></script>
+    <script src="~/js/Areas/Admin/Views/Pictures/PictureIndex.js"></script>
     <script src="~/AdminTemplate/Paging/jquery.simplePagination.js"></script>
     <script>
     $(function () {

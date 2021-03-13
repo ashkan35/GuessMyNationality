@@ -18,4 +18,7 @@ function RemovePic(id, input) {
             }
         });
 }
+function NationalityChanged(Nationality) {
+    console.log(Nationality);
+}
 //# sourceMappingURL=PictureIndex.js.map

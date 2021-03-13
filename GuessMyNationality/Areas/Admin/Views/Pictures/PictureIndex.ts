@@ -20,3 +20,6 @@
         }
     });
 }
+function NationalityChanged(Nationality) {
+    console.log(Nationality);
+}
