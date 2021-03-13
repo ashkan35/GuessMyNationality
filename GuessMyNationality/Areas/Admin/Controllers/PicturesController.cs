@@ -28,11 +28,17 @@ namespace GuessMyNationality.MVC.Areas.Admin.Controllers
             _imageResizer = imageResizer;
             _hostEnvironment = hostEnvironment;
         }
-        public IActionResult Index()
+        public IActionResult Index(int PageId=1)
         {
             var Pictures = _gamePictureRepository.Entities;
+            int PictureCount = Pictures.Count();
+            int take = 10;
+            int skip = (PageId - 1) * 10;
+            var Pictureslist = Pictures.Skip(skip).Take(take);
+            ViewBag.PageId = PageId;
+            ViewBag.TotalPages = PictureCount % 10 == 0 ? PictureCount / 10 : PictureCount / 10 + 1;
          
-            return View(Pictures);
+            return View(Pictureslist);
         }
         //Add Pictures to Game 
         public Task<ViewResult> AddPicture()

@@ -70,9 +70,9 @@
     <script>
     $(function () {
         $("#Paging").pagination({
-            pages:10 ,
-           cssStyle: 'light-theme',
-            currentPage: 3,
+            pages:@ViewBag.TotalPages ,
+          cssStyle: 'light-theme',
+            currentPage: @ViewBag.PageId,
             nextText: "Next",
             prevText: "Previous",
             onPageClick(pageNumber, event) {
