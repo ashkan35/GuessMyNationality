@@ -20,6 +20,11 @@
         }
     });
 }
-function NationalityChanged(Nationality) {
-    console.log(Nationality);
-}
+//function NationalityChanged(Nationality) {
+//    let url = (new URL(document.location.toString()));
+
+//    url.searchParams.delete("PageId");
+//    url.searchParams.set("Ntionality", Nationality);
+//    window.location = url;
+//}
+

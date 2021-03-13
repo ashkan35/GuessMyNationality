@@ -7,8 +7,8 @@
             <a class="btn btn-success btn-block" asp-action="AddPicture">Add New Picture</a>
             <div class="panel-body">
                 <label>Sort By:</label>
-                <select onchange="NationalityChanged(this.options[this.selectedIndex].text)" asp-items="Html.GetEnumSelectList<GuessMyNationality.Domain.Models.Nationality>()">
-                    <option selected="selected" value="">Please select</option>
+                <select onchange="NationalityChanged(this.options[this.selectedIndex].value)" asp-items="@ViewBag.SelectList">
+                    <option >Please select</option>
                 </select>
                 <div class="bootstrap-table">
                     <div class="fixed-table-toolbar"></div><div class="fixed-table-container">
@@ -92,3 +92,4 @@
 
     </script>
 }
+@*Html.GetEnumSelectList<GuessMyNationality.Domain.Models.Nationality>()*@

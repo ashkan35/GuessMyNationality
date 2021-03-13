@@ -18,7 +18,25 @@ function RemovePic(id, input) {
             }
         });
 }
-function NationalityChanged(Nationality) {
-    console.log(Nationality);
-}
+//function NationalityChanged(Nationality) {
+//    let url = (new URL(document.location.toString()));
+//    url.searchParams.delete("PageId");
+//    url.searchParams.set("Ntionality", Nationality);
+//    window.location = url;
+//}
 //# sourceMappingURL=PictureIndex.js.map
+function NationalityChanged(Nationality) {
+    if (Nationality != "Please select") {
+        let url = (new URL(document.location.toString()));
+        url.searchParams.delete("PageId");
+        url.searchParams.set("Ntionality", Nationality);
+        window.location = url;
+    }
+    else {
+        let url = (new URL(document.location.toString()));
+        url.searchParams.delete("PageId");
+        url.searchParams.delete("Ntionality");
+        window.location = url;
+    }
+
+}

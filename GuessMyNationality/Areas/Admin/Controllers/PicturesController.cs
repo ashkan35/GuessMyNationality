@@ -3,6 +3,7 @@ using GuessMyNationality.Data.Repository;
 using GuessMyNationality.Domain.Models;
 using GuessMyNationality.MVC.Areas.Admin.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -28,9 +29,18 @@ namespace GuessMyNationality.MVC.Areas.Admin.Controllers
             _imageResizer = imageResizer;
             _hostEnvironment = hostEnvironment;
         }
-        public IActionResult Index(int PageId=1)
+        public IActionResult Index(int PageId=1,int Ntionality=4)
         {
-            var Pictures = _gamePictureRepository.Entities;
+            List<EnumClass> enums = ((Nationality[])Enum.GetValues(typeof(Nationality))).Select(c => new EnumClass { Value = (int)c, Name = c.ToString() }).ToList();
+
+            var list = new { names = Enum.GetNames(typeof(Nationality)), values = Enum.GetValues(typeof(Nationality)) };
+            ViewBag.SelectList = new SelectList(enums,"Value","Name",Ntionality);
+            IEnumerable<GamePicture> Pictures;
+            if (Ntionality == 4)
+                Pictures = _gamePictureRepository.TableNoTracking;
+            else
+                Pictures = _gamePictureRepository.TableNoTracking.Where(x => x.Nationality == (Nationality)Ntionality);
+
             int PictureCount = Pictures.Count();
             int take = 10;
             int skip = (PageId - 1) * 10;
