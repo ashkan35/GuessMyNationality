@@ -1,7 +1,7 @@
 ﻿function CountDown(){
     var count = 4;
+    $(".StartButton").hide('slow');
 
-    $("span").text(count);
 
     var myTimer = setInterval(function () {
         if (count > 0) {
@@ -33,7 +33,6 @@ function startGame() {
     //        }
     //    });}, 6000);
     AddScore(null, null, null);
-    $(".StartButton").hide('slow');
     $(".ShowScore").hide('slow');
     StartShowingPictures();
 }
