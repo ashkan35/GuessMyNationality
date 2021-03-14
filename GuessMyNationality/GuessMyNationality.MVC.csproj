@@ -8,14 +8,19 @@
   <ItemGroup>
     <Compile Remove="Areas\Admin\Data\**" />
     <Compile Remove="Areas\Admin\Models\**" />
+    <Compile Remove="wwwroot\GamePictures\ThumbNails\**" />
     <Content Remove="Areas\Admin\Data\**" />
     <Content Remove="Areas\Admin\Models\**" />
+    <Content Remove="wwwroot\GamePictures\ThumbNails\**" />
     <EmbeddedResource Remove="Areas\Admin\Data\**" />
     <EmbeddedResource Remove="Areas\Admin\Models\**" />
+    <EmbeddedResource Remove="wwwroot\GamePictures\ThumbNails\**" />
     <None Remove="Areas\Admin\Data\**" />
     <None Remove="Areas\Admin\Models\**" />
+    <None Remove="wwwroot\GamePictures\ThumbNails\**" />
     <TypeScriptCompile Remove="Areas\Admin\Data\**" />
     <TypeScriptCompile Remove="Areas\Admin\Models\**" />
+    <TypeScriptCompile Remove="wwwroot\GamePictures\ThumbNails\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,10 +34,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\GamePictures\ThumbNails\" />
   </ItemGroup>
 
 </Project>

@@ -52,11 +52,11 @@ function AddScore(ImageGuid, GameGuid, Nationality) {
     if (GameGuid != null) {
         if ($("[name='Image']").attr('nationality') == Nationality) {
             $("#trueCircle").show('slow');
-            $("#trueCircle").hide('slow');
+            $("#trueCircle").hide(1500);
         }
         else {
             $("#falseCircle").show('slow');
-            $("#falseCircle").hide('slow');
+            $("#falseCircle").hide(1500);
         }
     }
     $.ajax({
