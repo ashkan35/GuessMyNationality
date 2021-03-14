@@ -1,3 +1,5 @@
+//Start a function to show count down gif for 5 secends
+//then Calls StartGame()
 function CountDown() {
     var count = 4;
     $(".StartButton").hide('slow');
@@ -18,19 +20,37 @@ function CountDown() {
         }
     }, 1070);
 }
+//Call Add scores by null values to create a new Game and get Score Board
 function startGame() {
-    //setInterval(function () {
-    //    $.ajax({
-    //        url: "/Home/GetCountDownViewComponent",
-    //        method: "post",
-    //        success: function (result) {
-    //            $(".content").html(result);
-    //        }
-    //    });}, 6000);
     AddScore(null, null, null);
     $(".ShowScore").hide('slow');
     StartShowingPictures();
 }
+//calculate and add scores
+//each picture has an optional attribute 'Nationality' with related value
+//this function compares the photo nationality with div id and shows true or false to user without befor sending informayion to server
+function AddScore(ImageGuid, GameGuid, Nationality) {
+    if (GameGuid != null) {
+        if ($("[name='Image']").attr('nationality') == Nationality) {
+            $("#trueCircle").show('slow');
+            $("#trueCircle").hide(1500);
+        }
+        else {
+            $("#falseCircle").show('slow');
+            $("#falseCircle").hide(1500);
+        }
+    }
+    $.ajax({
+        url: "/Home/GetScoresViewComponent",
+        data: { ImageGuid: ImageGuid, GameGuid: GameGuid, nationality: Nationality },
+        method: "post",
+        success: function (result) {
+            $("#ScoreSection").html(result);
+        }
+    });
+}
+//call 10 time a function to get a one picture from server each time
+//when loop ends, hides the game section and shows the Restart game button and also shows user score in a separate dive
 var i = 0;
 var j = 0;
 function StartShowingPictures() {
@@ -55,15 +75,7 @@ function StartShowingPictures() {
         }
     }, j);
 }
-//function RestartGame() {
-//    $.ajax({
-//        url: "/Home/GetStartButtonViewComponent",
-//        method: "post",
-//        success: function (result) {
-//            $(".content").replaceWith(result);
-//        }
-//        });
-//}
+//get random pictures from server and call the main function "start animation" to animate pictures and handle user drags
 function GetGamePictureAndStartMoving() {
     $.ajax({
         url: "/Home/GetGamePictureViewComponent",
@@ -75,37 +87,22 @@ function GetGamePictureAndStartMoving() {
         }
     });
 }
-function AddScore(ImageGuid, GameGuid, Nationality) {
-    if (GameGuid != null) {
-        if ($("[name='Image']").attr('nationality') == Nationality) {
-            $("#trueCircle").show('slow');
-            $("#trueCircle").hide(1500);
-        }
-        else {
-            $("#falseCircle").show('slow');
-            $("#falseCircle").hide(1500);
-        }
-    }
-    $.ajax({
-        url: "/Home/GetScoresViewComponent",
-        data: { ImageGuid: ImageGuid, GameGuid: GameGuid, nationality: Nationality },
-        method: "post",
-        success: function (result) {
-            $("#ScoreSection").html(result);
-        }
-    });
-}
+//main function wich animate pictures to bottom of the page and handles user drags
 function StartAnimation() {
+    //Start animating picture
     $(".image-box").animate({
         top: '200px',
     }, 3000, function () { $(this).remove(); });
+    //make pic draggable
     $("#draggable").draggable({
         containment: "body",
         opacity: 0.8,
         start: function () {
+            //stop picture falling down on drag start
             $(".image-box").stop();
         },
         stop: function (event, ui) {
+            //calculating each div left and top position wich picture will move there after release mouse button
             var left = ui.position.left;
             var top = ui.position.top;
             var div1Left = ((window.innerWidth - $('#Japanese')[0].offsetWidth) / 2) - 10;
@@ -116,6 +113,8 @@ function StartAnimation() {
             var div3Top = ((window.innerHeight - $('#Korean')[0].offsetHeight) / 2) - 32;
             var div4Left = ((window.innerWidth - $('#Thai')[0].offsetWidth) / 2) - 10;
             var div4Top = ((window.innerHeight - $('#Thai')[0].offsetHeight) / 2) - 32;
+            //calculate mouse movement from the drag start position when user releases the mouse button
+            //then animates the picture toward the position calculated before and when animate() ends,calls Add score with related valuse 
             if (left < 20 && top < 20) {
                 $("#draggable").animate({
                     left: '-' + div1Left + 'px',
