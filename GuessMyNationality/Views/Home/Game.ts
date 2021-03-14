@@ -1,5 +1,37 @@
-﻿
+﻿function CountDown(){
+    var count = 4;
+
+    $("span").text(count);
+
+    var myTimer = setInterval(function () {
+        if (count > 0) {
+            count = count - 1;
+            $.ajax({
+                url: "/Home/GetCountDownViewComponent",
+                method: "post",
+                success: function (result) {
+                    $(".content").html(result);
+                }
+            });
+        }
+        else {
+            clearInterval(myTimer);
+            startGame();
+        }
+    }, 1070);
+}
 function startGame() {
+
+
+
+    //setInterval(function () {
+    //    $.ajax({
+    //        url: "/Home/GetCountDownViewComponent",
+    //        method: "post",
+    //        success: function (result) {
+    //            $(".content").html(result);
+    //        }
+    //    });}, 6000);
     AddScore(null, null, null);
     $(".StartButton").hide('slow');
     $(".ShowScore").hide('slow');
@@ -8,7 +40,7 @@ function startGame() {
 var i = 0;
 var j = 0;
 function StartShowingPictures() {
-    
+
     if (i > 0) {
         j = 4000;
     }
@@ -22,7 +54,7 @@ function StartShowingPictures() {
             setTimeout(function () {
                 $("#StartButtonB").html("Restart Game");
                 $(".StartButton").show('slow');
-                $("#ShowScoreH").html("You Got" +"  "+ $('#finalScore').html()+"  "  +"Scores");
+                $("#ShowScoreH").html("You Got" + "  " + $('#finalScore').html() + "  " + "Scores");
                 $(".ShowScore").show('slow');
                 i = 0;
                 j = 0;
@@ -69,13 +101,13 @@ function AddScore(ImageGuid, GameGuid, Nationality) {
 
     $.ajax({
         url: "/Home/GetScoresViewComponent",
-        data: { ImageGuid: ImageGuid, GameGuid:GameGuid, nationality:Nationality },
+        data: { ImageGuid: ImageGuid, GameGuid: GameGuid, nationality: Nationality },
         method: "post",
         success: function (result) {
             $("#ScoreSection").html(result);
         }
-        });
-    
+    });
+
 }
 
 function StartAnimation() {

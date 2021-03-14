@@ -21,7 +21,7 @@ namespace GuessMyNationality.Controllers
         private readonly IHostEnvironment _hostEnvironment;
         private readonly IRepository<Game> _gamerepository;
 
-        public HomeController(ILogger<HomeController> logger, IRepository<GamePicture> PictureRepository, IHostEnvironment hostEnvironment,IRepository<Game> gamerepository)
+        public HomeController(ILogger<HomeController> logger, IRepository<GamePicture> PictureRepository, IHostEnvironment hostEnvironment, IRepository<Game> gamerepository)
         {
             _logger = logger;
             _pictureRepository = PictureRepository;
@@ -54,11 +54,11 @@ namespace GuessMyNationality.Controllers
             {
                 Guid = Pic.Guid,
                 Path = $"\\GamePictures\\{Pic.Name}",
-                Nationality= Pic.Nationality
+                Nationality = Pic.Nationality
             };
             return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.GamePictureViewComponent), model);
 
-         
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -66,10 +66,10 @@ namespace GuessMyNationality.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public async Task<ViewComponentResult> GetScoresViewComponent(CancellationToken cancellationToken,string ImageGuid="",string GameGuid="", Nationality? nationality=null)
+        public async Task<ViewComponentResult> GetScoresViewComponent(CancellationToken cancellationToken, string ImageGuid = "", string GameGuid = "", Nationality? nationality = null)
         {
 
-            if (GameGuid == null || GameGuid=="")
+            if (GameGuid == null || GameGuid == "")
             {
                 Game game = new Game
                 {
@@ -81,14 +81,14 @@ namespace GuessMyNationality.Controllers
                 };
                 await _gamerepository.AddAsync(game, cancellationToken);
                 GameViewModel model = new GameViewModel { GameGuid = game.Guid, GameScore = game.Score };
-                return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.ScoresViewComponent),model);
+                return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.ScoresViewComponent), model);
 
             }
             else
             {
                 var game = _gamerepository.Table.SingleOrDefault(x => x.Guid == GameGuid);
                 var image = _pictureRepository.Table.SingleOrDefault(x => x.Guid == ImageGuid);
-                if(game==null || image==null)
+                if (game == null || image == null)
                     return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.ScoresViewComponent), new GameViewModel());
                 else
                 {
@@ -106,9 +106,17 @@ namespace GuessMyNationality.Controllers
 
 
         }
-        public Task<ViewComponentResult> GetStartButtonViewComponent(int id=0)
+        public Task<ViewComponentResult> GetStartButtonViewComponent(int id = 0)
         {
-            return Task.Run(()=> { return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.StartButtonViewComponent)); });
+            return Task.Run(() => { return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.StartButtonViewComponent)); });
+        }
+        [HttpPost]
+        public Task<ViewComponentResult> GetCountDownViewComponent()
+        {
+            
+                return Task.Run(() => { return ViewComponent(typeof(GuessMyNationality.MVC.ViewComponents.CountDownViewComponent)); });
+
+            
         }
     }
 }

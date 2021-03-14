@@ -1,4 +1,32 @@
+function CountDown() {
+    var count = 4;
+    $("span").text(count);
+    var myTimer = setInterval(function () {
+        if (count > 0) {
+            count = count - 1;
+            $.ajax({
+                url: "/Home/GetCountDownViewComponent",
+                method: "post",
+                success: function (result) {
+                    $(".content").html(result);
+                }
+            });
+        }
+        else {
+            clearInterval(myTimer);
+            startGame();
+        }
+    }, 1070);
+}
 function startGame() {
+    //setInterval(function () {
+    //    $.ajax({
+    //        url: "/Home/GetCountDownViewComponent",
+    //        method: "post",
+    //        success: function (result) {
+    //            $(".content").html(result);
+    //        }
+    //    });}, 6000);
     AddScore(null, null, null);
     $(".StartButton").hide('slow');
     $(".ShowScore").hide('slow');
