@@ -31,6 +31,9 @@ namespace GuessMyNationality.Controllers
 
         public IActionResult Index()
         {
+            var UserAgent = Request.Headers["User-Agent"].ToString().ToLower();
+            if (UserAgent.Contains("android")|| UserAgent.Contains("iphone"))
+                return View("UnderConstruction");
             return View();
         }
         [HttpPost]

@@ -19,6 +19,7 @@ namespace GuessMyNationality.MVC.Areas.Admin.Controllers
         }
         public Task<ViewResult> Index()
         {
+
             var games = _gamerepository.TableNoTracking;
             return Task.Run(() => { return View(games); });
         }
