@@ -25,14 +25,18 @@
         </div>
     </form>
 
-
+    @{ 
+        var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+        var actionName = ViewContext.RouteData.Values["action"].ToString();
+    } 
     <ul class="nav menu">
-        <li  class="active"><a asp-controller="Home" asp-action="Index"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
-        <li><a asp-controller="Games" asp-action="Index"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Games</a></li>
+        <li  class=@((controllerName=="Home"&&actionName=="Index")?"active":"")><a asp-controller="Home" asp-action="Index"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
+        <li class=@((controllerName=="Games"&&actionName=="Index")?"active":"") ><a asp-controller="Games" asp-action="Index"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Games</a></li>
         <li class="parent ">
             <a data-toggle="collapse" href="#sub-item-1">
                 <svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder" /></svg> Game Pictures <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
             </a>
+
             <ul class="children collapse" id="sub-item-1">
                 <li>
                     <a class="" asp-controller="Pictures" asp-action="Index">
