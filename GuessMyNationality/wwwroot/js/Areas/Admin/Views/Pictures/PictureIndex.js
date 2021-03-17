@@ -32,12 +32,6 @@ function NationalityChanged(Nationality) {
         window.location.href = url.toString();
     }
 }
-$(document).ready(function () {
-    if (window.location.href.toUpperCase().includes("Pictures".toUpperCase()))
-    {
-        console.log("yes");
-    }
-});
 //function NationalityChanged(Nationality) {
 //    if (Nationality != "Please select") {
 //        let url = (new URL(document.location.toString()));

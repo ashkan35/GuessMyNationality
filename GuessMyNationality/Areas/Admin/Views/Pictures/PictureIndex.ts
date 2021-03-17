@@ -34,9 +34,7 @@ function NationalityChanged(Nationality) {
         window.location.href = url.toString();
     }
 }
-$(document).ready(function () {
-    console.log(window.location.href)
-});
+
 //function NationalityChanged(Nationality) {
 //    if (Nationality != "Please select") {
 //        let url = (new URL(document.location.toString()));
