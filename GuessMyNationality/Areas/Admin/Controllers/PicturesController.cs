@@ -59,8 +59,9 @@ namespace GuessMyNationality.MVC.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddPicture(AddPictureViewModel model,CancellationToken cancellationToken)
         {
-            
-            if (ModelState.IsValid)
+            //for test purpose only
+            //User.Identity.IsAuthenticated So nobody can add images untile remove this and implement some authentication
+            if (ModelState.IsValid && User.Identity.IsAuthenticated)
             {
                 var picguid = Guid.NewGuid().ToString("N");
                 var picname = picguid + ".jpg";
@@ -92,6 +93,10 @@ namespace GuessMyNationality.MVC.Areas.Admin.Controllers
             {
                 try
                 {
+                    //this app is just for test purpose and there is no authentication to enter admin panel 
+                    //so nobody can delete pictures
+                    if(!User.Identity.IsAuthenticated)
+                        return Json(new { result = true, message = "Insufficient Access you cant delete images" });
                     await _gamePictureRepository.DeleteAsync(pic, cancellationToken);
 
                     System.IO.File.Delete(_hostEnvironment.ContentRootPath + $"\\wwwroot\\GamePictures\\{pic.Name}");
