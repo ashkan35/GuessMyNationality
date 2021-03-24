@@ -135,6 +135,7 @@ function StartAnimation() {
 
             //calculate mouse movement from the drag start position when user releases the mouse button
             //then animates the picture toward the position calculated before and when animate() ends,calls Add score with related valuse 
+            //Negative sign for movement added in this section
             if (left < 20 && top < 20) {
                 $("#draggable").animate({
                     left: '-' + div1Left + 'px',
