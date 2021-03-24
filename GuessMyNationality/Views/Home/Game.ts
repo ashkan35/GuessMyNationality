@@ -116,7 +116,7 @@ function StartAnimation() {
         },
         stop: function (event, ui) {
 
-            //calculating each div left and top position wich picture will move there after release mouse button
+            //Calculate how many pixels must animate #draggable to left and top--All positive Numbers
             var left = ui.position.left;
             var top = ui.position.top;
 
